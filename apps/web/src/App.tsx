@@ -1,16 +1,33 @@
+import { AppShell } from "./components/AppShell";
+import { PageScaffold } from "./components/PageScaffold";
+import { SurfaceCard } from "./components/SurfaceCard";
 import { FoundationProbe } from "./app/FoundationProbe";
+import { traveloopRoutes } from "./routes/routeInventory";
 
 export function App() {
   return (
-    <main className="app-shell">
-      <section className="hero-panel" aria-labelledby="traveloop-title">
-        <p className="eyebrow">Traveloop foundation</p>
-        <h1 id="traveloop-title">Plan multi-city trips with a real stack.</h1>
-        <p>
-          This walking skeleton proves the React app can call Express and persist data in local PostgreSQL.
-        </p>
+    <AppShell>
+      <PageScaffold
+        eyebrow="Traveloop foundation"
+        title="Database-backed trip planning starts here."
+        description="A constrained shell for the supplied Traveloop screens, wired to the API probe and ready for later traveler workflows."
+        toolbar={<button type="button">Plan a trip</button>}
+      >
         <FoundationProbe />
-      </section>
-    </main>
+        <div className="route-grid" aria-label="Approved Traveloop route inventory">
+          {traveloopRoutes.map((route) => (
+            <SurfaceCard key={route.id} className="route-card">
+              <div>
+                <p className="route-phase">Phase {route.phase}</p>
+                <h2>{route.label}</h2>
+              </div>
+              <p>{route.path}</p>
+              <span>{route.source}</span>
+              {route.deferred ? <strong>Deferred</strong> : null}
+            </SurfaceCard>
+          ))}
+        </div>
+      </PageScaffold>
+    </AppShell>
   );
 }
