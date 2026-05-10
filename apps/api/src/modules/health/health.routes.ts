@@ -13,6 +13,13 @@ const probeSchema = z.object({
 });
 
 healthRouter.get(
+  "/health",
+  asyncRoute(async (_req, res) => {
+    res.json(success({ status: "ok", database: "postgresql" }));
+  })
+);
+
+healthRouter.get(
   "/foundation-probes/latest",
   asyncRoute(async (_req, res) => {
     const probe = await prisma.foundationProbe.findFirst({

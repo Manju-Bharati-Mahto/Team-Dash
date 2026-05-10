@@ -21,7 +21,7 @@ app.use(cors({ origin: env.WEB_ORIGIN }));
 app.use(express.json());
 
 app.get("/api/health", (_req, res) => {
-  res.json(success({ status: "ok" }));
+  res.json(success({ status: "ok", database: "postgresql" }));
 });
 
 app.use("/api", healthRouter);
