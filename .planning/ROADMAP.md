@@ -40,6 +40,29 @@
 - Use visual UI pages and brand DNA for layout and styling references.
 - Keep admin tables optional or clearly isolated until Phase 7.
 
+**Plan Breakdown**:
+
+**Wave 1**
+- `01-01` - Walking Skeleton workspace, local PostgreSQL config, minimal Prisma probe, Express API, and Vite frontend probe.
+
+**Wave 2 *(blocked on Wave 1 completion)***
+- `01-02` - Complete Prisma/PostgreSQL relational schema and blocking local migration.
+
+**Wave 3 *(blocked on Wave 2 completion for schema-backed work; frontend shell also depends on Wave 1)***
+- `01-03` - Deterministic demo seed data and seed verification helper.
+- `01-04` - Modular Express API conventions, Zod validation, structured errors, and domain route placeholders.
+- `01-05` - Supplied-only frontend route inventory and Traveloop visual shell primitives.
+
+**Wave 4 *(blocked on Wave 3 completion)***
+- `01-06` - Full-stack health/status integration, verification commands, README, and skeleton sign-off.
+
+**Cross-cutting constraints:**
+- Use only local PostgreSQL with Prisma; no Firebase, Supabase, MongoDB Atlas, or backend-as-a-service dependencies.
+- Preserve TypeScript frontend/backend/shared separation under `apps/web`, `apps/api`, and `packages/shared`.
+- Keep Phase 1 to foundation, schema, seed, API conventions, route inventory, and shell primitives; defer full traveler workflows to later phases.
+- Every API response follows `{ data: ... }` or `{ error: { code, message, details } }`.
+- Route inventory and global styling must remain grounded in the supplied SVG, visual UI images, and Traveloop brand DNA.
+
 ### Phase 2: Login, Dashboard, Create Trip, My Trips
 
 **Goal:** Deliver authenticated user access plus the first complete trip-management loop: sign up/login, see dashboard, create a trip, and manage owned trips.
