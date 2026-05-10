@@ -1,0 +1,21 @@
+:root {
+  --color-page: #F5F1EA;
+  --color-surface: #FFFFFF;
+  --color-accent: #5E6B52;
+  --color-ink: #1F231E;
+  --color-muted: #6E746A;
+  --color-border: #E7E2D7;
+  --color-soft-olive: #A8B38E;
+  --color-warm-clay: #B2765C;
+  --color-danger: #B85C4A;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --radius-card: 8px;
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}

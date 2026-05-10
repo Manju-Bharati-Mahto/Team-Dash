@@ -1,0 +1,24 @@
+{
+  "name": "traveloop",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @traveloop/api & npm run dev --workspace @traveloop/web",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "db:validate": "prisma validate",
+    "db:migrate": "prisma migrate dev --name init",
+    "db:seed": "tsx prisma/seed.ts",
+    "verify": "npm run build && npm run db:validate"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.9",
+    "prisma": "^6.19.3",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

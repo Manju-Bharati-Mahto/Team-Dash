@@ -21,11 +21,11 @@ A developer can start the local Traveloop stack, click a frontend foundation pro
 
 ## Stack Touched In Phase 1
 
-- [ ] Project scaffold: npm workspaces, TypeScript, build scripts, lint hooks where lightweight.
-- [ ] Routing: one real Vite app route plus route inventory constants for supplied Traveloop screens.
-- [ ] Database: one real write and read through Prisma against local PostgreSQL.
-- [ ] UI: a foundation probe button wired to the API, plus global Traveloop shell primitives.
-- [ ] Deployment: documented local full-stack run command through root scripts.
+- [x] Project scaffold: npm workspaces, TypeScript, build scripts, lint hooks where lightweight.
+- [x] Routing: one real Vite app route plus route inventory constants for supplied Traveloop screens.
+- [x] Database: one real write and read through Prisma against local PostgreSQL.
+- [x] UI: a foundation probe button wired to the API, plus global Traveloop shell primitives.
+- [x] Deployment: documented local full-stack run command through root scripts.
 
 ## Out Of Scope
 

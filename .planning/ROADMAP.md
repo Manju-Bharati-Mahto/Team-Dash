@@ -8,7 +8,7 @@
 
 | Phase | Name | Goal | Requirements | Status |
 |-------|------|------|--------------|--------|
-| 1 | Foundation + database | Establish app skeleton, local relational database, schema, seed data, API conventions, and visual foundations | FOUND-01..FOUND-06 | Pending |
+| 1 | Foundation + database | Establish app skeleton, local relational database, schema, seed data, API conventions, and visual foundations | FOUND-01..FOUND-06 | Complete |
 | 2 | Login, dashboard, create trip, my trips | Deliver authenticated trip ownership and the first usable traveler loop | AUTH-01..AUTH-05, TRIP-01..TRIP-05 | Pending |
 | 3 | Itinerary builder, itinerary view, city search, activity search | Deliver the core trip-planning workflow with stops, activities, search, and day-wise review | ITIN-01..ITIN-05, SRCH-01..SRCH-06 | Pending |
 | 4 | Trip budget and packing checklist | Add cost visibility and packing organization to each trip | BUDG-01..BUDG-04, PACK-01..PACK-05 | Pending |
@@ -19,6 +19,8 @@
 ## Phases
 
 ### Phase 1: Foundation + Database
+
+**Status:** Complete (2026-05-10)
 
 **Goal:** Establish the technical foundation judges expect: local PostgreSQL, relational schema, modular backend API conventions, seed data, route inventory, and global visual foundations based on the supplied Traveloop inputs.
 **Mode:** mvp
@@ -209,7 +211,7 @@
 Run:
 
 ```bash
-$gsd-plan-phase 1
+$gsd-discuss-phase 2
 ```
 
 ---
