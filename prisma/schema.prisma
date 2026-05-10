@@ -12,3 +12,261 @@ model FoundationProbe {
   label     String
   createdAt DateTime @default(now())
 }
+
+enum TripStatus {
+  DRAFT
+  PLANNED
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+enum ActivityCategory {
+  CULTURE
+  FOOD
+  NATURE
+  ADVENTURE
+  SHOPPING
+  WELLNESS
+  NIGHTLIFE
+  TRANSIT
+}
+
+enum ExpenseCategory {
+  TRANSPORT
+  STAY
+  ACTIVITIES
+  MEALS
+  OTHER
+}
+
+enum PackingCategory {
+  CLOTHING
+  DOCUMENTS
+  ELECTRONICS
+  ESSENTIALS
+  TOILETRIES
+}
+
+enum NoteScope {
+  TRIP
+  STOP
+  DAY
+}
+
+enum ShareState {
+  ACTIVE
+  REVOKED
+  EXPIRED
+}
+
+model User {
+  id                String             @id @default(cuid())
+  email             String             @unique
+  passwordHash      String
+  displayName       String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  profile           UserProfile?
+  trips             Trip[]
+  savedDestinations SavedDestination[]
+
+  @@index([createdAt])
+}
+
+model UserProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  homeCity    String?
+  avatarUrl   String?
+  bio         String?
+  travelStyle String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Trip {
+  id           String        @id @default(cuid())
+  ownerId      String
+  name         String
+  status       TripStatus    @default(DRAFT)
+  startDate    DateTime
+  endDate      DateTime
+  budgetAmount Decimal       @default(0) @db.Decimal(10, 2)
+  coverImage   String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  owner        User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  stops        TripStop[]
+  expenses     Expense[]
+  packingItems PackingItem[]
+  notes        TripNote[]
+  publicShares PublicShare[]
+
+  @@index([ownerId])
+  @@index([ownerId, status])
+  @@index([ownerId, startDate])
+  @@index([startDate, endDate])
+}
+
+model TripStop {
+  id             String         @id @default(cuid())
+  tripId         String
+  cityId         String
+  position       Int
+  arrivalDate    DateTime
+  departureDate  DateTime
+  lodgingName    String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  trip           Trip           @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  city           City           @relation(fields: [cityId], references: [id])
+  stopActivities StopActivity[]
+  notes          TripNote[]
+
+  @@unique([tripId, position])
+  @@index([tripId, position])
+  @@index([cityId])
+}
+
+model City {
+  id                String             @id @default(cuid())
+  name              String
+  country           String
+  region            String
+  costIndex         Int
+  popularityScore   Int
+  imageUrl          String?
+  imageAlt          String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  tripStops         TripStop[]
+  activities        Activity[]
+  savedDestinations SavedDestination[]
+
+  @@unique([name, country])
+  @@index([country, region, name])
+  @@index([name])
+  @@index([popularityScore])
+}
+
+model Activity {
+  id              String             @id @default(cuid())
+  cityId          String
+  name            String
+  category        ActivityCategory
+  estimatedCost   Decimal            @db.Decimal(10, 2)
+  durationMinutes Int
+  description     String
+  imageUrl        String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  city            City               @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  stopActivities  StopActivity[]
+
+  @@unique([cityId, name])
+  @@index([cityId])
+  @@index([cityId, category])
+  @@index([estimatedCost])
+  @@index([durationMinutes])
+}
+
+model StopActivity {
+  id              String   @id @default(cuid())
+  stopId          String
+  activityId      String
+  plannedDate     DateTime
+  startTime       String?
+  position        Int
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  stop            TripStop @relation(fields: [stopId], references: [id], onDelete: Cascade)
+  activity        Activity @relation(fields: [activityId], references: [id])
+
+  @@unique([stopId, position])
+  @@index([stopId])
+  @@index([activityId])
+  @@index([plannedDate])
+}
+
+model Expense {
+  id          String          @id @default(cuid())
+  tripId      String
+  category    ExpenseCategory
+  title       String
+  quantity    Int             @default(1)
+  unitCost    Decimal         @db.Decimal(10, 2)
+  amount      Decimal         @db.Decimal(10, 2)
+  spentAt     DateTime?
+  notes       String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  trip        Trip            @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+  @@index([tripId, category])
+  @@index([spentAt])
+}
+
+model PackingItem {
+  id        String          @id @default(cuid())
+  tripId    String
+  category  PackingCategory
+  label     String
+  quantity  Int             @default(1)
+  packed    Boolean         @default(false)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  trip      Trip            @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+  @@index([tripId, category, packed])
+}
+
+model TripNote {
+  id        String    @id @default(cuid())
+  tripId    String
+  stopId    String?
+  scope     NoteScope
+  title     String
+  body      String
+  noteDate  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  trip      Trip      @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  stop      TripStop? @relation(fields: [stopId], references: [id], onDelete: SetNull)
+
+  @@index([tripId])
+  @@index([tripId, scope, noteDate])
+  @@index([stopId])
+  @@index([createdAt])
+}
+
+model PublicShare {
+  id        String     @id @default(cuid())
+  tripId    String
+  token     String     @unique
+  state     ShareState @default(ACTIVE)
+  expiresAt DateTime?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  trip      Trip       @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+  @@index([token, state])
+}
+
+model SavedDestination {
+  id        String   @id @default(cuid())
+  userId    String
+  cityId    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  city      City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, cityId])
+  @@index([userId])
+  @@index([cityId])
+}
