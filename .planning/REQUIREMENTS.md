@@ -7,12 +7,12 @@
 
 ### Foundation
 
-- [ ] **FOUND-01**: Application uses a local PostgreSQL relational database with migrations and seed data.
-- [ ] **FOUND-02**: Database schema models users, trips, stops, cities, activities, trip activities, expenses, packing items, public shares, saved destinations, profiles, and trip notes with proper relationships.
-- [ ] **FOUND-03**: Backend exposes clear modular APIs for each core domain area.
-- [ ] **FOUND-04**: Backend validates request inputs and returns consistent error responses.
-- [ ] **FOUND-05**: Frontend route inventory maps only to the supplied problem statement, SVG flow, and visual page images.
-- [ ] **FOUND-06**: Global UI styling follows the supplied Traveloop brand DNA: off-white surfaces, dark olive primary actions, refined travel photography, Playfair Display-style headings, Inter-style body text, rounded cards/controls, and clean line icons.
+- [x] **FOUND-01**: Application uses a local PostgreSQL relational database with migrations and seed data.
+- [x] **FOUND-02**: Database schema models users, trips, stops, cities, activities, trip activities, expenses, packing items, public shares, saved destinations, profiles, and trip notes with proper relationships.
+- [x] **FOUND-03**: Backend exposes clear modular APIs for each core domain area.
+- [x] **FOUND-04**: Backend validates request inputs and returns consistent error responses.
+- [x] **FOUND-05**: Frontend route inventory maps only to the supplied problem statement, SVG flow, and visual page images.
+- [x] **FOUND-06**: Global UI styling follows the supplied Traveloop brand DNA: off-white surfaces, dark olive primary actions, refined travel photography, Playfair Display-style headings, Inter-style body text, rounded cards/controls, and clean line icons.
 
 ### Authentication
 
@@ -105,12 +105,12 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 1 | Pending |
-| FOUND-05 | Phase 1 | Pending |
-| FOUND-06 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
+| FOUND-02 | Phase 1 | Complete |
+| FOUND-03 | Phase 1 | Complete |
+| FOUND-04 | Phase 1 | Complete |
+| FOUND-05 | Phase 1 | Complete |
+| FOUND-06 | Phase 1 | Complete |
 | AUTH-01 | Phase 2 | Pending |
 | AUTH-02 | Phase 2 | Pending |
 | AUTH-03 | Phase 2 | Pending |
