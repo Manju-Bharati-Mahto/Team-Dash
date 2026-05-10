@@ -65,7 +65,8 @@ The Phase 1 foundation is tied together with PostgreSQL-aware health endpoints, 
 
 ## Verification
 
-- `npm run db:migrate` passed and reported the database already in sync.
+- `npm run db:migrate` passed and reported the database already in sync; the script executed `prisma migrate dev --name init`.
+- `npx prisma db push` passed and reported the database already in sync with the Prisma schema.
 - `npm run db:seed` passed and printed `Seed complete: Traveloop demo data ready`.
 - `npm run verify` passed.
 - README contains local setup, database, development, verification, and scope guard sections.

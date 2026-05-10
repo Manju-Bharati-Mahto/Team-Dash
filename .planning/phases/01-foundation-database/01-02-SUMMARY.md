@@ -54,7 +54,7 @@ The database foundation now models the complete Traveloop traveler domain: users
 ## Verification
 
 - `npm run db:validate` passed.
-- `npm run db:migrate` passed against local PostgreSQL outside the sandbox.
+- `npm run db:migrate` passed against local PostgreSQL outside the sandbox; the script executed `prisma migrate dev --name init`.
 - Migration SQL contains `CREATE TABLE` statements.
 
 ## Deviations from Plan
